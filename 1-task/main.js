@@ -33,6 +33,7 @@ function changeResult() {
   let editedResult = transformedResults.find(
     result => result === selectedMatch
   );
+
   newOurTeamScore < 0 && (newOurTeamScore = 0);
   newOpponentTeamScore < 0 && (newOpponentTeamScore = 0);
   editedResult.ourScore = parseInt(newOurTeamScore);

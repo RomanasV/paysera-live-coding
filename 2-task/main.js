@@ -1,16 +1,43 @@
-const landFields = ["XOOXO", "XOOXO", "OOOXO", "XXOXO", "OXOOO"];
+let textField = document.querySelector("h5");
+let input = document.querySelector("input");
+let btn = document.querySelector("button.counter-btn");
+let arrayStr = document.querySelector("p.card-text");
 
-transformFields = arr => {
+let landFields = ["XOOXO", "XOOXO", "OOOXO", "XXOXO", "OXOOO"];
+let transformedFields = [];
+
+init();
+
+btn.addEventListener("click", () => {
+  let enteredStr = input.value;
+
+  landFields = enteredStr
+    .toUpperCase()
+    .split("")
+    .filter(symbol => symbol === "X" || symbol === "O" || symbol === ",")
+    .join("")
+    .split(",");
+
+  init();
+});
+
+function init() {
+  transformFields(landFields);
+  landPerimeter(transformedFields);
+  arrayStr.innerHTML = `YOUR ARRAY: [${landFields.map(
+    field => ` "${field}"`
+  )}]`;
+}
+
+function transformFields(arr) {
   let newArr = [];
   arr.map(field => {
     return newArr.push(field.split(""));
   });
-  return newArr;
-};
+  transformedFields = newArr;
+}
 
-const transformedFields = transformFields(landFields);
-
-landPerimeter = arr => {
+function landPerimeter(arr) {
   const MAX_PERIMETER = 4;
   let perimeterSum = 0;
 
@@ -30,7 +57,5 @@ landPerimeter = arr => {
       perimeterSum += fieldPerimeter;
     }
   }
-  return console.log(`Total land perimeter: ${perimeterSum}`);
-};
-
-landPerimeter(transformedFields);
+  textField.innerHTML = `Total land perimeter: ${perimeterSum}`;
+}
