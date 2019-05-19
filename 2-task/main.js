@@ -8,10 +8,18 @@ let transformedFields = [];
 
 init();
 
+input.addEventListener("keypress", event => {
+  let enteredStr = input.value;
+  event.keyCode === 13 && updateArr(enteredStr);
+});
+
 btn.addEventListener("click", () => {
   let enteredStr = input.value;
+  updateArr(enteredStr);
+});
 
-  landFields = enteredStr
+function updateArr(str) {
+  landFields = str
     .toUpperCase()
     .split("")
     .filter(symbol => symbol === "X" || symbol === "O" || symbol === ",")
@@ -19,7 +27,7 @@ btn.addEventListener("click", () => {
     .split(",");
 
   init();
-});
+}
 
 function init() {
   transformFields(landFields);
