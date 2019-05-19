@@ -5,13 +5,18 @@ const MAX_YEARS = 30;
 
 let textField = document.querySelector("h5");
 let input = document.querySelector("input");
-let btn = document.querySelector("a");
+let btn = document.querySelector("button.counter");
 
 init();
 
 btn.addEventListener("click", () => {
   let enteredYears = isNaN(input.value) ? 0 : input.value;
   transformText(enteredYears);
+});
+
+input.addEventListener("keypress", event => {
+  let enteredYears = isNaN(input.value) ? 0 : input.value;
+  event.keyCode === 13 && transformText(enteredYears);
 });
 
 function init() {
@@ -27,7 +32,7 @@ transformText = enteredYears => {
     ? (textField.textContent = `${enteredYears} years have passed. And you now have ${getTotalCows(
         enteredYears
       )} cows.`)
-    : (textField.textContent = `${enteredYears} years are too much for calculation. You will probably have bazillions cows at that point!`);
+    : (textField.textContent = `${enteredYears} years is too long for calculation. We can calculate up to ${MAX_YEARS} years. You will probably have bazillions cows at that point, though!`);
 };
 
 getTotalCows = years => {

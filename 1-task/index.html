@@ -13,9 +13,37 @@
     <title>Football results counter</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="../index.html">Paysera Live Coding</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="../1-task/index.html"
+            >Football Team <span class="sr-only">(current)</span></a
+          >
+          <a class="nav-item nav-link" href="../2-task/index.html"
+            >Perimeter Counter</a
+          >
+          <a class="nav-item nav-link" href="../3-task/index.html"
+            >Cow Counter</a
+          >
+        </div>
+      </div>
+    </nav>
+
     <div class="container-fluid">
       <div class="row">
-        <div class="col-6 mx-auto">
+        <div class="col-md-8 col-sm-10 col-xs-12 mx-auto">
           <div class="card text-center mt-5">
             <table class="table table-hover table-sm">
               <thead>
@@ -59,19 +87,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-number our-team">Our Team</span>
-              </div>
+            <div class="form-group">
+              <label>Our Team</label>
               <input
                 type="number"
                 aria-label="Our team"
                 class="form-control edit-our-team"
                 min="0"
               />
-              <div class="input-group-prepend">
-                <span class="input-group-number">Opponent Team</span>
-              </div>
+            </div>
+            <div class="form-group">
+              <label>Opponent Team</label>
               <input
                 type="number"
                 aria-label="Opponent team"
@@ -82,19 +108,19 @@
           </div>
           <div class="modal-footer">
             <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button
               onclick="changeResult()"
               type="button"
               class="btn btn-primary"
               data-dismiss="modal"
             >
               Save changes
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
             </button>
           </div>
         </div>
