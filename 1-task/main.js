@@ -5,7 +5,7 @@ const resultsCollection = [
   "13:1",
   "2:2",
   "0:1",
-  "3:1",
+  "3:3",
   "2:2",
   "0:1",
   "3:1",
@@ -48,10 +48,30 @@ function countPoints(ourTeam, opponentTeam) {
   }
 }
 
+function countTotals(results) {
+  let teamTotals = {
+    numsOfGames: 0,
+    scored: 0,
+    opponentScored: 0,
+    points: 0
+  };
+
+  results.map(result => {
+    teamTotals.numsOfGames++;
+    teamTotals.scored += result.ourScore;
+    teamTotals.opponentScored += result.opponentScore;
+    teamTotals.points += result.points;
+  });
+
+  return teamTotals;
+}
+
 function formTableRows(results) {
   let rowHTMLStr = formTotalsRow(results);
+
   results.map((result, index) => {
-    rowHTMLStr += `<tr>
+    let tablesClass = changeTableClass(result);
+    rowHTMLStr += `<tr class="${tablesClass}">
       <th scope="row">${index + 1}</th>
       <td>${result.ourScore}</td>
       <td>${result.opponentScore}</td>
@@ -62,26 +82,31 @@ function formTableRows(results) {
 }
 
 function formTotalsRow(results) {
-  let totalsHTMLStr = "";
-  let numsOfGames = 0;
-  let totalScored = 0;
-  let totalOpponentScored = 0;
-  let totalPoints = 0;
-
-  results.map(result => {
-    numsOfGames++;
-    totalScored += result.ourScore;
-    totalOpponentScored += result.opponentScore;
-    totalPoints += result.points;
-  });
-
-  totalsHTMLStr = `
+  let totals = countTotals(results);
+  let totalsHTMLStr = `
     <tr class="table-primary totals">
-      <th scope="col ">${numsOfGames}</th>
-      <th scope="col">${totalScored}</th>
-      <th scope="col">${totalOpponentScored}</th>
-      <th scope="col">${totalPoints}</th>
-    </tr><th scope="col">`;
+      <th scope="col ">${totals.numsOfGames}</th>
+      <th scope="col">${totals.scored}</th>
+      <th scope="col">${totals.opponentScored}</th>
+      <th scope="col">${totals.points}</th>
+    </tr>`;
 
   return totalsHTMLStr;
+}
+
+function changeTableClass(result) {
+  let tableClass = "table-";
+  switch (result.points) {
+    case 3:
+      tableClass += "success";
+      break;
+    case 1:
+      tableClass += "warning";
+      break;
+    default:
+      tableClass += "danger";
+      break;
+  }
+
+  return tableClass;
 }
